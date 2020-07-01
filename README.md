@@ -57,6 +57,25 @@ Create new HTTP recorder (it register metrics under the hood):
 s := &server{
     metrics = httpmetrics.NewHttpRecorder("myService", httpmetrics.Config{})
 }
+defer s.metrics.Unregister()
+```
+Create responseWriter struct with necessary methods. Custom responseWriter type used for intercepting http.ResponseWriter. 
+```
+type responseWriter struct {
+	http.ResponseWriter
+	code         int
+	bytesWritten int
+}
+
+func (w *responseWriter) WriteHeader(statusCode int) {
+	w.code = statusCode
+	w.ResponseWriter.WriteHeader(statusCode)
+}
+
+func (w *responseWriter) Write(p []byte) (int, error) {
+	w.bytesWritten += len(p)
+	return w.ResponseWriter.Write(p)
+}
 ```
 Create middleware using the way you prefer. In the middleware extract properties from request, pass them into deferred Collect method executed after request has been handled. 
 ```
@@ -119,7 +138,15 @@ func NewStore(ctx context.Context, c *Config) (*Store, error) {
  
 	return s, nil
 }
+
+func ...() {
+    s, _ := NewStore(context.Background(), config)
+    s.Metrics.PostgresMetrics.Unregister()
+    s.Metrics.RedisMetrics.Unregister()
+}
 ```
+When store has been created, don't forget to add deferred metrics unregistering, to avoid test failures.
+
 For Postgres, assign AfterRelease function to AfterRelease of pgxpool.Config.
 ```
 func NewPostgresStore(postgresURL string, metrics metrics.PostgresRecorder) (*pgxpool.Pool, error) {
