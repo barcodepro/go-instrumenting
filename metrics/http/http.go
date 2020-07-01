@@ -1,10 +1,8 @@
 package http
 
 import (
-	"fmt"
 	"github.com/barcodepro/go-instrumenting/metrics"
 	"github.com/prometheus/client_golang/prometheus"
-	"regexp"
 	"time"
 )
 
@@ -85,17 +83,9 @@ func NewHttpRecorder(appName string, config Config) metrics.HttpRecorder {
 
 // Collect updates metrics using passed properties
 func (r recorder) Collect(props metrics.HTTPReqProperties, duration time.Duration, bytesWritten int) {
-	var (
-		re      = regexp.MustCompile(`[0-9]{1,}`)
-		path    = re.ReplaceAllString(props.Path, "*")
-		method  = props.Method
-		code    = fmt.Sprintf("%dxx", props.Code/100)
-		written = bytesWritten
-	)
-
-	r.HttpRequestsTotal.WithLabelValues(path, method, code).Inc()
-	r.HttpRequestsDurationsHistogram.WithLabelValues(path, method, code).Observe(duration.Seconds())
-	r.HttpResponseSizeHistogram.WithLabelValues(path, method, code).Observe(float64(written))
+	r.HttpRequestsTotal.WithLabelValues(props.Path, props.Method, props.Code).Inc()
+	r.HttpRequestsDurationsHistogram.WithLabelValues(props.Path, props.Method, props.Code).Observe(duration.Seconds())
+	r.HttpResponseSizeHistogram.WithLabelValues(props.Path, props.Method, props.Code).Observe(float64(bytesWritten))
 }
 
 // Unregister ...

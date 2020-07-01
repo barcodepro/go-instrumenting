@@ -14,7 +14,7 @@ import (
 type HTTPReqProperties struct {
 	Path   string // URL Path of the request.
 	Method string // Method of the request.
-	Code   int    // Response code is the request.
+	Code   string // Response code is the request.
 }
 
 // HttpRecorder knows how to record and measure HTTP metrics.

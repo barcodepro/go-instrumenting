@@ -85,10 +85,11 @@ func (s *server) instrumentRequest(next http.Handler) http.Handler {
 
         start := time.Now()
         defer func() {
+            // here is any transformations on request propertirs can be made
             props := metrics.HTTPReqProperties{
                 Path:   r.RequestURI,
                 Method: r.Method,
-                Code:   rw.code,
+                Code:   fmt.Sprintf("%d", rw.code),
             }
             s.metrics.Collect(props, time.Since(start), rw.bytesWritten)
         }()
