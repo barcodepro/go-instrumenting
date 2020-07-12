@@ -7,7 +7,7 @@ import (
 )
 
 const (
-	labelService = "service"
+	labelApp = "application"
 )
 
 type recorder struct {
@@ -23,7 +23,7 @@ func NewPostgresRecorder(appName string) metrics.PostgresRecorder {
 			Subsystem:   "postgres",
 			Name:        "xacts_total",
 			Help:        "The total number of processed transactions.",
-			ConstLabels: map[string]string{labelService: appName},
+			ConstLabels: map[string]string{labelApp: appName},
 		}, []string{}),
 	}
 

@@ -24,7 +24,7 @@ func TestNewPostgresRecorder(t *testing.T) {
 				r.Collect()
 			},
 			expMetrics: []string{
-				`app_postgres_xacts_total{service="test-app"} 1`,
+				`app_postgres_xacts_total{application="test-app"} 1`,
 			},
 		},
 		{
@@ -33,7 +33,7 @@ func TestNewPostgresRecorder(t *testing.T) {
 				r.Collect()
 			},
 			expMetrics: []string{
-				`app_postgres_xacts_total{service="test-app"} 1`,
+				`app_postgres_xacts_total{application="test-app"} 1`,
 			},
 		},
 	}

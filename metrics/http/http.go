@@ -7,10 +7,10 @@ import (
 )
 
 const (
-	labelService = "service"
-	labelPath    = "path"
-	labelMethod  = "method"
-	labelStatus  = "status"
+	labelApp    = "application"
+	labelPath   = "path"
+	labelMethod = "method"
+	labelStatus = "status"
 )
 
 type Config struct {
@@ -48,7 +48,7 @@ func NewHttpRecorder(appName string, config Config) metrics.HttpRecorder {
 			Subsystem:   "http",
 			Name:        "requests_total",
 			Help:        "The total number of processed requests.",
-			ConstLabels: map[string]string{labelService: appName},
+			ConstLabels: map[string]string{labelApp: appName},
 		}, []string{labelPath, labelMethod, labelStatus}),
 
 		HttpRequestsDurationsHistogram: prometheus.NewHistogramVec(prometheus.HistogramOpts{
@@ -57,7 +57,7 @@ func NewHttpRecorder(appName string, config Config) metrics.HttpRecorder {
 			Name:        "request_duration_seconds",
 			Help:        "The latency of the HTTP requests.",
 			Buckets:     config.DurationBuckets,
-			ConstLabels: map[string]string{labelService: appName},
+			ConstLabels: map[string]string{labelApp: appName},
 		}, []string{labelPath, labelMethod, labelStatus}),
 
 		HttpResponseSizeHistogram: prometheus.NewHistogramVec(prometheus.HistogramOpts{
@@ -66,7 +66,7 @@ func NewHttpRecorder(appName string, config Config) metrics.HttpRecorder {
 			Name:        "response_size_bytes",
 			Help:        "The size of the HTTP responses.",
 			Buckets:     config.SizeBuckets,
-			ConstLabels: map[string]string{labelService: appName},
+			ConstLabels: map[string]string{labelApp: appName},
 		}, []string{labelPath, labelMethod, labelStatus}),
 	}
 

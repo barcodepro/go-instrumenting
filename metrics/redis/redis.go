@@ -11,7 +11,7 @@ import (
 )
 
 const (
-	labelService  = "service"
+	labelApp      = "application"
 	labelStatus   = "status"
 	labelCommand  = "command"
 	labelKeyspace = "keyspace"
@@ -48,7 +48,7 @@ func NewRedisRecorder(appName string, config Config) metrics.RedisRecorder {
 			Subsystem:   "redis",
 			Name:        "requests_total",
 			Help:        "The total number of processed requests.",
-			ConstLabels: map[string]string{labelService: appName},
+			ConstLabels: map[string]string{labelApp: appName},
 		}, []string{labelCommand, labelKeyspace, labelStatus}),
 
 		RedisRequestsDurationsHistogram: prometheus.NewHistogramVec(prometheus.HistogramOpts{
@@ -57,7 +57,7 @@ func NewRedisRecorder(appName string, config Config) metrics.RedisRecorder {
 			Name:        "request_duration_seconds",
 			Help:        "The latency of the Redis requests.",
 			Buckets:     config.DurationBuckets,
-			ConstLabels: map[string]string{labelService: appName},
+			ConstLabels: map[string]string{labelApp: appName},
 		}, []string{labelCommand, labelKeyspace, labelStatus}),
 	}
 
