@@ -1,11 +1,11 @@
 package http_test
 
 import (
-	"github.com/barcodepro/go-instrumenting/metrics"
-	httpmetrics "github.com/barcodepro/go-instrumenting/metrics/http"
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 	"github.com/stretchr/testify/assert"
+	"github.com/weaponry/go-instrumenting/metrics"
+	httpmetrics "github.com/weaponry/go-instrumenting/metrics/http"
 	"io/ioutil"
 	"net/http"
 	"net/http/httptest"

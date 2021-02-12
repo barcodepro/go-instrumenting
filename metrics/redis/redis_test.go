@@ -1,11 +1,11 @@
 package redis_test
 
 import (
-	"github.com/barcodepro/go-instrumenting/metrics"
-	redismetrics "github.com/barcodepro/go-instrumenting/metrics/redis"
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 	"github.com/stretchr/testify/assert"
+	"github.com/weaponry/go-instrumenting/metrics"
+	redismetrics "github.com/weaponry/go-instrumenting/metrics/redis"
 	"io/ioutil"
 	"net/http"
 	"net/http/httptest"

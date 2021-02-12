@@ -1,11 +1,11 @@
 package postgres_test
 
 import (
-	"github.com/barcodepro/go-instrumenting/metrics"
-	postgresmetrics "github.com/barcodepro/go-instrumenting/metrics/postgres"
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 	"github.com/stretchr/testify/assert"
+	"github.com/weaponry/go-instrumenting/metrics"
+	postgresmetrics "github.com/weaponry/go-instrumenting/metrics/postgres"
 	"io/ioutil"
 	"net/http"
 	"net/http/httptest"

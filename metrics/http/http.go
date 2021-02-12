@@ -1,8 +1,8 @@
 package http
 
 import (
-	"github.com/barcodepro/go-instrumenting/metrics"
 	"github.com/prometheus/client_golang/prometheus"
+	"github.com/weaponry/go-instrumenting/metrics"
 	"time"
 )
 

@@ -2,9 +2,9 @@ package redis
 
 import (
 	"context"
-	"github.com/barcodepro/go-instrumenting/metrics"
 	"github.com/go-redis/redis/v7"
 	"github.com/prometheus/client_golang/prometheus"
+	"github.com/weaponry/go-instrumenting/metrics"
 	"regexp"
 	"strings"
 	"time"

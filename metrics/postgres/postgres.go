@@ -1,9 +1,9 @@
 package postgres
 
 import (
-	"github.com/barcodepro/go-instrumenting/metrics"
 	"github.com/jackc/pgx/v4"
 	"github.com/prometheus/client_golang/prometheus"
+	"github.com/weaponry/go-instrumenting/metrics"
 )
 
 const (

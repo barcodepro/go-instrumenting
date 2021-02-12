@@ -1,4 +1,4 @@
-module github.com/barcodepro/go-instrumenting
+module github.com/weaponry/go-instrumenting
 
 go 1.14
 
